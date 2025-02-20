@@ -1,51 +1,32 @@
 import java.util.Arrays;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-       int[] nums1 = {1,2,3,0,0,0};
-       int[] nums2 = {2,5,6};
-       int[] nums = {3,2,2,3};
-       int val = 3;
-        int k = 0;
-
-                for (int i = 0;i<nums.length-1;i++){
-                    if(nums[i]==val){
-                        nums[i]=0;
-                        Boolean check = false;
-                        while(!check){
-                            check = true;
-                            for(int j = 0;j<nums.length-1;j++){
-                                if(nums[j]<nums[j+1]){
-                                    int temp = nums[j];
-                                    nums[j] = nums[j+1];
-                                    nums[j+1] = temp;
-                                    check = true;
-                                }
-
-                            }
-
-
-                        }
-                    }
-
-
+    // Определяем класс Solution вне метода main
+    static class Solution {
+        public int removeElement(int[] nums, int val) {
+            int k = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] != val) { // Если элемент не равен val
+                    nums[k] = nums[i]; // Ставим его на место k
+                    k++; // Увеличиваем k
                 }
-
-         for(int g = 0; g<nums.length;g++){
-            if(nums[g]!=val&&nums[g]!=0){
-                k++;
-
             }
 
+            // После выполнения цикла элементы, оставшиеся в массиве после k, будут игнорироваться.
+            // Печать массива с актуальными значениями до k
+            return k;
         }
+    }
 
-                System.out.println(k+Arrays.toString(nums));
+    public static void main(String[] args) {
+        int[] nums = {3, 2, 2, 3};  // Пример входного массива
+        int val = 3;  // Значение для удаления
+        Solution sol = new Solution();  // Создаем экземпляр класса Solution
 
-            }
-        }
+        int k = sol.removeElement(nums, val);  // Вызываем метод removeElement
 
-
-
-
+        // Печатаем результат
+        System.out.println("k = " + k);
+        System.out.println("nums после удаления: " + Arrays.toString(Arrays.copyOf(nums, k)));  // Массив с актуальными элементами
+    }
+}
